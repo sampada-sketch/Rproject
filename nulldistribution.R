@@ -1,0 +1,19 @@
+obs<-mean(treatment)-mean(controls)
+obs
+population<-read.csv("femaleControlsPopulation.csv")
+population<-unlist(population)
+population
+n<-10000
+nulls<-vector("numeric",n)
+for(i in 1:n)
+{
+  controls<-sample(population,3)
+  treatment<-sample(population,3)
+  nulls[i]<-mean(treatment)-mean(controls)
+}
+mean(nulls>obs)
+mean(abs(nulls)>obs)
+library(rafalib)
+mypar()
+qqnorm(nulls)
+qqline(nulls)
